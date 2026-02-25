@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
+    base: "/fluid-sim/",
     plugins: [react()],
     worker: {
       format: "es",
@@ -15,6 +16,10 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
+        input: {
+          main: "index.html",
+          app: "app/index.html",
+        },
         output: {
           entryFileNames: "assets/[name].js",
           chunkFileNames: "assets/[name].js",

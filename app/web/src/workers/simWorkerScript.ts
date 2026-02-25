@@ -155,7 +155,7 @@ onmessage = async (event: WorkerMessageEvent) => {
       self.postMessage({
         type: "UPDATE_POSITIONS",
         payload: {
-          memory: simMemory,
+          memoryBuffer: simMemory.buffer,
           positionsPtr: simWasm.get_positions_ptr(),
           velocityMagnitudesPtr: simWasm.get_velocity_magnitudes_ptr(),
         },
@@ -179,7 +179,7 @@ onmessage = async (event: WorkerMessageEvent) => {
       //     self.postMessage({
       //       type: "UPDATE_POSITIONS",
       //       payload: {
-      //         memory: simMemory,
+      //         memoryBuffer: simMemory.buffer,
       //         positionsPtr: simWasm.get_positions_ptr(),
       //         velocityMagnitudesPtr: simWasm.get_velocity_magnitudes_ptr(),
       //       },
@@ -251,7 +251,7 @@ onmessage = async (event: WorkerMessageEvent) => {
         self.postMessage({
           type: "UPDATE_POSITIONS",
           payload: {
-            memory: simMemory,
+            memoryBuffer: simMemory.buffer,
             positionsPtr: simWasm.get_positions_ptr(),
             velocityMagnitudesPtr: simWasm.get_velocity_magnitudes_ptr(),
           },

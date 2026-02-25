@@ -17,7 +17,7 @@ if (!root) throw new Error('No element with id "root" found');
 createRoot(root).render(
   <StrictMode>
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/fluid-sim">
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/login" element={<Auth />} />
