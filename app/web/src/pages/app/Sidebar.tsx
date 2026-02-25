@@ -76,7 +76,7 @@ export default function Sidebar({
   return (
     <div className={`sidebar-container ${visible ? "visible" : "hidden"}`}>
       <div className="sidebar">
-        <h2>Welcome {user?.username ?? "Unknown user"}!</h2>
+        <h2>Welcome!</h2>
         <div className="logout">
           <span
             onClick={(e) => {
