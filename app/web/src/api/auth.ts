@@ -1,7 +1,7 @@
 export function signupRequest(
-  username: string,
-  email: string,
-  password: string,
+  _username: string,
+  _email: string,
+  _password: string,
 ) {
   return Promise.resolve({});
   // return post<SignupResponseBody>(
@@ -15,8 +15,8 @@ export function signupRequest(
 }
 
 export function confirmSignupRequest(
-  username: string,
-  confirmationCode: string,
+  _username: string,
+  _confirmationCode: string,
 ) {
   return Promise.resolve({});
   // return post<SignupResponseBody>(
@@ -28,7 +28,7 @@ export function confirmSignupRequest(
   // );
 }
 
-export function loginRequest(username: string, password: string) {
+export function loginRequest(username: string, _password: string) {
   return Promise.resolve({
     user: {
       id: "1",
@@ -38,6 +38,7 @@ export function loginRequest(username: string, password: string) {
       federated: false,
     },
     requiresMfa: false,
+    session: undefined,
   });
   // return post<LoginResponseBody>(
   //   "/api/auth/login",
@@ -64,7 +65,7 @@ export function logoutRequest() {
 }
 
 // MFA API functions
-export function setupMfaRequest(username: string) {
+export function setupMfaRequest(_username: string) {
   return Promise.resolve({
     secretCode: "secret-code",
     qrCodeUrl: "https://tarangjanawalkar.com/",
@@ -75,7 +76,7 @@ export function setupMfaRequest(username: string) {
   // );
 }
 
-export function verifyMfaRequest(username: string, mfaCode: string) {
+export function verifyMfaRequest(_username: string, _mfaCode: string) {
   return Promise.resolve({ success: true });
   // return post<VerifyMfaResponseBody>(
   //   "/api/auth/mfa/verify",
@@ -85,7 +86,7 @@ export function verifyMfaRequest(username: string, mfaCode: string) {
 
 export function verifyMfaChallengeRequest(
   username: string,
-  mfaCode: string,
+  _mfaCode: string,
   session: string,
 ) {
   return Promise.resolve({
@@ -139,7 +140,7 @@ export function initiateGoogleLogin() {
   //   });
 }
 
-export function cognitoCallbackRequest(code: string) {
+export function cognitoCallbackRequest(_code: string) {
   return Promise.resolve({
     user: {
       id: "1",

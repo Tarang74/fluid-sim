@@ -4,7 +4,7 @@ export function createSimRequest() {
   return Promise.resolve({
     metadata: {
       id: "1",
-      createdAt: new Date().toISOString(),
+      createdAt: new Date(),
       description: "New Simulation",
       // Simulation parameters
       gravity: -12.0,
@@ -23,7 +23,7 @@ export function getSimRequest(simId: string) {
   return Promise.resolve({
     metadata: {
       id: simId,
-      createdAt: new Date().toISOString(),
+      createdAt: new Date(),
       description: "New Simulation",
       // Simulation parameters
       gravity: -12.0,
@@ -39,11 +39,23 @@ export function getSimRequest(simId: string) {
 }
 
 export function updateSimRequest(
-  simId: string,
+  _simId: string,
   metadata: UpdateSimRequestBody["metadata"],
 ) {
   return Promise.resolve({
-    metadata: metadata,
+    metadata: {
+      id: metadata.id || "1",
+      createdAt: metadata.createdAt || new Date(),
+      description: metadata.description || "New Simulation",
+      // Simulation parameters
+      gravity: metadata.gravity || -12.0,
+      targetDensity: metadata.targetDensity || 75.0,
+      pressureMultiplier: metadata.pressureMultiplier || 500.0,
+      viscosityStrength: metadata.viscosityStrength || 0.03,
+      smoothingRadius: metadata.smoothingRadius || 0.35,
+      interactionStrength: metadata.interactionStrength || 90.0,
+      interactionRadius: metadata.interactionRadius || 2.0,
+    },
   });
   // return patch<UpdateSimResponseBody>(
   //   `/api/sims/${simId}`,
@@ -51,7 +63,7 @@ export function updateSimRequest(
   // );
 }
 
-export function deleteSimRequest(simId: string) {
+export function deleteSimRequest(_simId: string) {
   return Promise.resolve({});
   // return del<DeleteSimResponseBody>(`/api/sims/${simId}`);
 }
@@ -61,7 +73,7 @@ export function listSimsRequest() {
     metadataList: [
       {
         id: "1",
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(),
         description: "New Simulation",
         // Simulation parameters
         gravity: -12.0,
@@ -78,10 +90,10 @@ export function listSimsRequest() {
 }
 
 export function uploadSimImageRequest(
-  simId: string,
-  timestamp: string,
-  frameCount: number,
-  mime: string,
+  _simId: string,
+  _timestamp: string,
+  _frameCount: number,
+  _mime: string,
 ) {
   return Promise.resolve({
     filename: "frame.png",
@@ -94,9 +106,9 @@ export function uploadSimImageRequest(
 }
 
 export function downloadSimImageRequest(
-  simId: string,
-  timestamp: string,
-  filename: string,
+  _simId: string,
+  _timestamp: string,
+  _filename: string,
 ) {
   return Promise.resolve({
     downloadUrl: "https://tarangjanawalkar.com/frame.png",
@@ -107,9 +119,9 @@ export function downloadSimImageRequest(
 }
 
 export function deleteSimImageRequest(
-  simId: string,
-  timestamp: string,
-  filename: string,
+  _simId: string,
+  _timestamp: string,
+  _filename: string,
 ) {
   return Promise.resolve({});
   // return del<DeleteSimImageResponseBody>(
@@ -118,12 +130,13 @@ export function deleteSimImageRequest(
 }
 
 export function listSimRecordingsRequest(
-  simId: string,
-  limit: number,
-  token?: string,
+  _simId: string,
+  _limit: number,
+  _token?: string,
 ) {
   return Promise.resolve({
     items: [],
+    nextToken: undefined,
   });
   // const query: GetSimRecordingsQuery = {
   //   limit: limit,
@@ -138,13 +151,14 @@ export function listSimRecordingsRequest(
 }
 
 export function listSimImagesRequest(
-  simId: string,
-  timestamp: string,
-  limit: number,
-  token?: string,
+  _simId: string,
+  _timestamp: string,
+  _limit: number,
+  _token?: string,
 ) {
   return Promise.resolve({
     items: [],
+    nextToken: undefined,
   });
   // const query: GetSimImagesQuery = {
   //   limit: limit,
