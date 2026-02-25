@@ -1,0 +1,339 @@
+.sidebar-container {
+  right: 0;
+  text-align: right;
+  transition:
+    right 0.6s ease,
+    border-left 0.6s ease;
+
+  .sidebar {
+    right: 0;
+    text-align: right;
+
+    /* padding-bottom: 30px; */
+
+    .logout {
+      span {
+        text-transform: uppercase;
+        text-decoration: underline solid #22222200;
+        cursor: pointer;
+
+        transition: text-decoration 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      span:hover,
+      span:focus {
+        text-decoration: underline solid #222222ff;
+      }
+    }
+
+    .simulation-settings {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      gap: 2px;
+    }
+
+    .mfa-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 1rem;
+
+      .mfa-toggle-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+
+        .mfa-label {
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #333;
+        }
+
+        .mfa-switch {
+          position: relative;
+          display: inline-block;
+          min-width: 50px;
+          height: 24px;
+
+          input[type="checkbox"] {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+          }
+
+          .mfa-switch-label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+
+            .mfa-switch-slider {
+              position: absolute;
+              content: "";
+              height: 18px;
+              width: 18px;
+              left: 3px;
+              bottom: 3px;
+              background-color: white;
+              transition: 0.4s;
+              border-radius: 50%;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+          }
+
+          input[type="checkbox"]:checked + .mfa-switch-label {
+            background-color: #222222;
+          }
+
+          input[type="checkbox"]:checked
+            + .mfa-switch-label
+            .mfa-switch-slider {
+            transform: translateX(26px);
+          }
+
+          input[type="checkbox"]:disabled + .mfa-switch-label {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+
+          input[type="checkbox"]:focus + .mfa-switch-label {
+            box-shadow: 0 0 0 2px rgba(34, 34, 34, 0.2);
+          }
+        }
+      }
+
+      .mfa-loading {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #666;
+        font-style: italic;
+      }
+    }
+
+    .simulations {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+
+      margin-bottom: 1rem;
+      min-height: 100px;
+      max-height: 200px;
+
+      padding: 4px;
+      gap: 4px;
+      width: calc(100% - 10px);
+
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+
+      .simulation {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        gap: 4px;
+
+        .simulation-description {
+          flex: 1;
+          min-width: 0;
+          font-size: 0.8rem;
+
+          input {
+            width: 100%;
+          }
+        }
+
+        .simulation-delete {
+          flex: 0;
+        }
+      }
+    }
+  }
+}
+
+.close-button-2 {
+  position: fixed;
+  top: 20px;
+
+  transition: right 0.6s ease;
+  svg {
+    background-color: none;
+    height: 29.5px;
+    aspect-ratio: 1;
+    cursor: pointer;
+
+    transition: stroke 0.6s ease;
+  }
+}
+
+/* Play button always at right: 24px, always white */
+.sim-play-button {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  transition: right 0.6s ease;
+  svg {
+    background-color: none;
+    height: 29.5px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    stroke: #f0f0f0 !important;
+    fill: #222222;
+  }
+}
+
+/* Step button always at right: 24px, always white */
+.sim-step-button {
+  position: fixed;
+  bottom: calc(30px + 29.5px);
+  right: 24px;
+  transition: right 0.6s ease;
+  svg {
+    background-color: none;
+    height: 29.5px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    stroke: #f0f0f0 !important;
+    fill: #222222;
+  }
+}
+
+.sidebar-container.visible {
+  z-index: 2;
+  border-left: 2px solid #222222ff;
+}
+.close-button-2.visible {
+  z-index: 3;
+  right: calc(300px + 24px - 30px);
+  svg {
+    stroke: #222222;
+  }
+}
+.sim-play-button.visible {
+  z-index: 3;
+}
+.sim-step-button.visible {
+  z-index: 3;
+}
+
+.sidebar-container.hidden {
+  right: calc(-300px - 48px);
+  border-left: 2px solid #000000ff;
+}
+.close-button-2.hidden {
+  right: 24px;
+  svg {
+    stroke: #f0f0f0;
+  }
+}
+.sim-play-button.hidden {
+  right: 24px;
+}
+.sim-step-button.hidden {
+  right: 24px;
+}
+
+@media (max-width: 800px) {
+  .close-button-2.visible {
+    right: calc(100% - 24px - 30px);
+  }
+  .sidebar-container.hidden {
+    right: -100%;
+  }
+  .close-button-2.hidden {
+    right: 24px;
+  }
+  .sim-play-button,
+  .sim-play-button.visible,
+  .sim-play-button.hidden,
+  .sim-step-button,
+  .sim-step-button.visible,
+  .sim-step-button.hidden {
+    right: 24px;
+  }
+}
+
+.input-numeric {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex: 1;
+
+  label {
+    position: absolute;
+    left: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+
+    pointer-events: none;
+  }
+
+  input[type="number"] {
+    flex: 1;
+    height: 28px;
+    text-align: end;
+    border-radius: 2px;
+    border: 1px solid #22222280;
+  }
+}
+
+.checkbox {
+  display: flex;
+  height: 28px;
+  aspect-ratio: 1;
+
+  position: relative;
+
+  input[type="checkbox"] {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border: 2px solid #222222;
+    border-radius: 2px;
+
+    cursor: pointer;
+
+    + .checkmark {
+      svg {
+        fill: none;
+      }
+    }
+  }
+
+  input[type="checkbox"]:checked {
+    + .checkmark {
+      svg {
+        fill: #222222;
+      }
+    }
+  }
+
+  .checkmark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    svg {
+      width: 80%;
+      height: 80%;
+    }
+  }
+}

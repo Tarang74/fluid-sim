@@ -1,0 +1,18 @@
+[package]
+name = "sim-core"
+version = "1.0.0"
+edition = "2024"
+description = "Particle-based fluid simulator"
+license = "MIT"
+repository = "git@github.com:Tarang74/CAB432-Assessment"
+
+[lib]
+crate-type = ["rlib"]
+
+[dependencies]
+bytemuck = { version = "1.14", features = ["derive"] }
+rayon = "1.11.0"
+serde = { version = "1.0.219", features = ["derive"] }
+
+[features]
+direct-access = []

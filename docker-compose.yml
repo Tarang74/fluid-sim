@@ -1,0 +1,93 @@
+name: fluid-sim
+
+services:
+  api:
+    build:
+      context: app/
+      dockerfile: api.Dockerfile
+    platform: linux/amd64
+    image: ${API_ECR_REPO_URL}:latest
+    container_name: api
+    restart: always
+    ports:
+      - "${API_PORT_HOST}:${API_PORT_CONTAINER}"
+    environment:
+      AWS_REGION: ${AWS_REGION}
+      API_PORT_CONTAINER: ${API_PORT_CONTAINER}
+      REDIS_ELASTICACHE_ENDPOINT: ${REDIS_ELASTICACHE_ENDPOINT}
+      REDIS_ELASTICACHE_PORT: ${REDIS_ELASTICACHE_PORT}
+      POSTGRES_PRIVATE_IP: ${POSTGRES_PRIVATE_IP}
+      POSTGRES_PORT_HOST: ${POSTGRES_PORT_HOST}
+      NODE_ENV: production
+    command: ["node", "dist/index.js"]
+
+  render:
+    build:
+      context: app/
+      dockerfile: render.Dockerfile
+    platform: linux/amd64
+    image: ${RENDER_ECR_REPO_URL}:latest
+    container_name: render
+    restart: always
+    ports:
+      - "${RENDER_PORT}:${RENDER_PORT}"
+    environment:
+      BLENDER_PATH: ${BLENDER_PATH}
+      API_PRIVATE_IP: ${API_PRIVATE_IP}
+      API_PORT_HOST: ${API_PORT_HOST}
+    command: ["./render"]
+
+  websocket:
+    build:
+      context: app/
+      dockerfile: websocket.Dockerfile
+    platform: linux/amd64
+    image: ${WEBSOCKET_ECR_REPO_URL}:latest
+    container_name: websocket
+    restart: always
+    ports:
+      - "${WEBSOCKET_PORT}:${WEBSOCKET_PORT}"
+    environment:
+      WEBSOCKET_PORT: ${WEBSOCKET_PORT}
+      S3_SIMULATION_BUCKET: ${S3_SIMULATION_BUCKET}
+      SQS_RENDER_JOBS_URL: ${SQS_RENDER_JOBS_URL}
+    command: ["./websocket"]
+
+  postgres:
+    build:
+      context: app/
+      dockerfile: postgres.Dockerfile
+    platform: linux/amd64
+    image: ${POSTGRES_ECR_REPO_URL}:latest
+    container_name: postgres
+    restart: always
+    ports:
+      - "${POSTGRES_PORT_HOST}:${POSTGRES_PORT_CONTAINER}"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: ["postgres"]
+
+  # For local development
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "${REDIS_ELASTICACHE_PORT}:${REDIS_ELASTICACHE_PORT}"
+    volumes:
+      - redis_data:/data
+      - ./app/redis:/usr/local/etc/redis:ro
+    command: [
+      "redis-server",
+      "--appendonly", "yes",
+      "--appendfsync", "everysec",
+      "--aclfile", "/usr/local/etc/redis/users.acl"
+    ]
+
+volumes:
+  postgres_data:
+  redis_data:

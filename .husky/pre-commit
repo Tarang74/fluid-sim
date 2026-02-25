@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "\nRunning pre-commit hooks with Husky"
+
+npm --prefix app/shared run build
+npm --prefix app/api run lint
+npm --prefix app/web run lint
+npm --prefix app/api run typecheck
+npm --prefix app/web run typecheck
+
+cargo clippy --manifest-path app/libs/sim-core/Cargo.toml -- -D warnings
+cargo clippy --manifest-path app/websocket/Cargo.toml -- -D warnings
+cargo clippy --manifest-path app/render/Cargo.toml -- -D warnings
+
+npm --prefix app/api run format-check
+npm --prefix app/web run format-check
+npm --prefix app/shared run format-check
+
+cargo fmt --manifest-path app/libs/sim-core/Cargo.toml --check
+cargo fmt --manifest-path app/websocket/Cargo.toml --check
+cargo fmt --manifest-path app/render/Cargo.toml --check
+
+echo ""

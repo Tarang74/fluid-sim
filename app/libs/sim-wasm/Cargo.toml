@@ -1,0 +1,17 @@
+[package]
+name = "sim-wasm"
+version = "1.0.0"
+edition = "2024"
+description = "WebAssembly bindings for particle-based fluid simulator"
+license = "MIT"
+repository = "git@github.com:Tarang74/CAB432-Assessment"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+console_error_panic_hook = "0.1.7"
+wasm-bindgen-rayon = "1.2"
+sim-core = { path = "../sim-core" }
+

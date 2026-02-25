@@ -1,0 +1,27 @@
+{
+  "name": "@tarang-and-tina/shared",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format-check": "prettier --check \"src/**/*.ts\""
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.6",
+    "@types/connect": "^3.4.38",
+    "@types/express": "^5.0.3",
+    "@types/express-serve-static-core": "^5.0.7",
+    "@types/http-errors": "^2.0.5",
+    "@types/mime": "^3.0.4",
+    "@types/range-parser": "^1.2.7",
+    "@types/send": "^0.17.5",
+    "@types/serve-static": "^1.15.8",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  }
+}

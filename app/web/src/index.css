@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  font-family:
+    Inter Tight,
+    system-ui,
+    Helvetic,
+    sans-serif;
+  font-weight: 400;
+
+  color: #f0f0f0;
+  background-color: #222222;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  margin: 0;
+  /* user-select: none; */
+  /* -webkit-user-select: none; */
+  /* -moz-user-select: none; */
+
+  /* overflow: hidden; */
+  /* cursor: default; */
+}
+
+::-moz-selection {
+  background: rgba(200, 200, 200, 0.5);
+}
+
+::selection {
+  background: rgba(200, 200, 200, 0.5);
+}
+
+body {
+  background-color: #202020;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-content: center;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+button,
+input,
+select {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+}

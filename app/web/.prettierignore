@@ -1,0 +1,3 @@
+src/sim-wasm-pkg/
+dist/
+node_modules/
