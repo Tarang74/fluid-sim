@@ -1,6 +1,6 @@
 # ThreeJS Particle-Based Fluid Simulation with WebAssembly
 
-By Tarang Janawalkar
+By Tarang Janawalkar and Christina Edwards
 
 This project was developed for the unit CAB432 Cloud Computing at the
 Queensland University of Technology in Semester 2, 2025.
