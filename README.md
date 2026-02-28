@@ -12,7 +12,7 @@ Grade Achieved: 100%
 Particle-Based Fluid Simulation:
 - https://cseweb.ucsd.edu/classes/wi20/cse169-a/slides/CSE169_16.pdf
 
-Smoothed-Particle Hydrodynamics:
+Smoothed Particle Hydrodynamics:
 - https://cs418.cs.illinois.edu/website/text/sph.html
 - https://personal.ems.psu.edu/~fkd/courses/EGEE520/2017Deliverables/SPH_2017.pdf
 
