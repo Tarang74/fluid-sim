@@ -1,3 +1,11 @@
+.images-panel-container {
+  left: 0;
+
+  transition:
+    left 0.6s ease,
+    border-right 0.6s ease;
+}
+
 .close-button-1 {
   position: fixed;
   top: 20px;
@@ -13,14 +21,6 @@
   }
 }
 
-.images-panel-container {
-  left: 0;
-
-  transition:
-    left 0.6s ease,
-    border-right 0.6s ease;
-}
-
 .images-panel-container.visible {
   z-index: 2;
   border-right: 2px solid #222222ff;
@@ -34,7 +34,7 @@
 }
 
 .images-panel-container.hidden {
-  left: -348px;
+  left: calc(-300px - 48px);
   border-right: 2px solid #000000ff;
 }
 .close-button-1.hidden {

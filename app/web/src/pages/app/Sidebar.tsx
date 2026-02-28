@@ -22,9 +22,6 @@ export default function Sidebar({
     simMetadata,
     simMetadataList,
     simWorker,
-    simPaused,
-    toggleSim,
-    stepSim,
     updateSim,
     setSim,
     createSim,
@@ -487,64 +484,6 @@ export default function Sidebar({
             strokeLinejoin="round"
             d={visible ? "" : "M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"}
           />
-        </svg>
-      </div>
-      <div
-        className={`sim-play-button ${visible ? "visible" : "hidden"}`}
-        onClick={() => {
-          toggleSim();
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#f0f0f0"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-        >
-          {simPaused ? (
-            <>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
-              />
-            </>
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          )}
-        </svg>
-      </div>
-
-      <div
-        className={`sim-step-button ${visible ? "visible" : "hidden"}`}
-        onClick={() => {
-          stepSim();
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#f0f0f0"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-        >
-          {simPaused ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z"
-            />
-          ) : null}
         </svg>
       </div>
 

@@ -18,3 +18,35 @@
     fill: #222222;
   }
 }
+
+.sim-play-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  svg {
+    background-color: none;
+    height: 29.5px;
+    aspect-ratio: 1;
+    cursor: pointer;
+
+    stroke: #f0f0f0;
+    fill: #222222;
+  }
+}
+
+.sim-step-button {
+  position: fixed;
+  bottom: calc(30px + 29.5px);
+  right: 20px;
+
+  svg {
+    background-color: none;
+    height: 29.5px;
+    aspect-ratio: 1;
+    cursor: pointer;
+
+    stroke: #f0f0f0;
+    fill: #222222;
+  }
+}
