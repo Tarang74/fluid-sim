@@ -1,4 +1,6 @@
-import init, { WasmSim2D as Sim2D } from "sim-wasm";
+type SimWasmModule = typeof import("sim-wasm");
+
+let simModule: SimWasmModule | null = null;
 // import { getSimSocket } from "../ws/SimSocket.ts";
 
 export const PARTICLE_COUNT = 5000;
@@ -87,7 +89,7 @@ let frame = 0;
 // };
 
 // WebWorker
-let simWasm: Sim2D | null = null;
+let simWasm: import("sim-wasm").WasmSim2D | null = null;
 
 const DT = 1 / 60.0;
 let intervalId: NodeJS.Timeout | null = null;
@@ -97,7 +99,8 @@ onmessage = async (event: WorkerMessageEvent) => {
 
   switch (type) {
     case "INIT_WASM": {
-      const wasmInit = await init({
+      simModule = await import("sim-wasm");
+      const wasmInit = await simModule.default({
         module_or_path: new URL(
           "../sim-wasm-pkg/sim_wasm_bg.wasm",
           import.meta.url,
@@ -126,7 +129,7 @@ onmessage = async (event: WorkerMessageEvent) => {
       const interactionStrength = event.data.payload.interactionStrength;
       const interactionRadius = event.data.payload.interactionRadius;
 
-      simWasm = new Sim2D(
+      simWasm = new simModule!.WasmSim2D(
         PARTICLE_COUNT,
         PARTICLE_RADIUS,
         worldWidth,

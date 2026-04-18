@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv, type PluginOption } from "vite";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import wasm from "vite-plugin-wasm";
-import topLevelAwait from "vite-plugin-top-level-await";
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -12,9 +11,10 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     worker: {
       format: "es",
-      plugins: () => [wasm(), topLevelAwait()] as PluginOption[],
+      plugins: () => [wasm()] as PluginOption[],
     },
     build: {
+      chunkSizeWarningLimit: 1000,
       rollupOptions: {
         input: {
           main: "index.html",
