@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    base: "/fluid-sim/",
+    base: "/",
     plugins: [react()],
     worker: {
       format: "es",
