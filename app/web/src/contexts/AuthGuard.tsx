@@ -1,12 +1,10 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { type ReactNode, useEffect, useState } from "react";
 import Loader from "../pages/loader";
 import { useAuth } from "./Auth";
-import { useEffect, useState } from "react";
 import { getMfaRequest, refreshTokenRequest } from "../api/auth";
 
-export default function AuthGuard() {
+export default function AuthGuard({ children }: { children: ReactNode }) {
   const { authenticated, setUser, setAuthenticated } = useAuth();
-  const location = useLocation();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,11 +30,12 @@ export default function AuthGuard() {
       .catch(() => {
         setAuthenticated(false);
         setUser(null);
+        window.location.href = "/login";
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [location.pathname, setAuthenticated, setUser]);
+  }, [setAuthenticated, setUser]);
 
   if (loading) {
     return (
@@ -46,7 +45,7 @@ export default function AuthGuard() {
         <Loader loading={loading} />
       </main>
     );
-  } else {
-    return authenticated ? <Outlet /> : <Navigate to="/login" replace />;
   }
+
+  return authenticated ? <>{children}</> : null;
 }

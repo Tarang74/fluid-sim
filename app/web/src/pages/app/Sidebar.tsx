@@ -3,7 +3,6 @@ import "./Sidebar.css";
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 
 import type { SimMetadata } from "@tarang-and-tina/shared/dist/domain";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth.ts";
 import { useSim } from "../../contexts/Sim";
 import { setMfaRequest } from "../../api/auth";
@@ -14,8 +13,6 @@ export default function Sidebar({
 }: {
   setMessage: Dispatch<SetStateAction<string>>;
 }) {
-  const navigate = useNavigate();
-
   const { user, logout } = useAuth();
   const {
     simId,
@@ -80,7 +77,7 @@ export default function Sidebar({
               e.preventDefault();
               logout()
                 .then(() => {
-                  void navigate("/");
+                  window.location.href = "/";
                 })
                 .catch((err: unknown) => {
                   setMessage(String(err));

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import { cognitoCallbackRequest } from "../../api/auth";
 
 export default function OAuthCallback() {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(window.location.search);
   const { setAuthenticated, setUser } = useAuth();
   const [error, setError] = useState<string | null>(null);
 
@@ -27,12 +25,12 @@ export default function OAuthCallback() {
       .then((response) => {
         setAuthenticated(true);
         setUser(response.user);
-        void navigate("/app");
+        window.location.href = "/app";
       })
       .catch((err: unknown) => {
         setError(`Login failed: ${String(err)}`);
       });
-  }, [searchParams, navigate, setAuthenticated, setUser]);
+  }, []);
 
   if (error) {
     return (
@@ -51,7 +49,7 @@ export default function OAuthCallback() {
         <button
           type="button"
           onClick={() => {
-            void navigate("/login");
+            window.location.href = "/login";
           }}
           style={{
             padding: "0.75rem 1.5rem",

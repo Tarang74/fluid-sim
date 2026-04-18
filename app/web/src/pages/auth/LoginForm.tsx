@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 import { useState, type Dispatch, type SetStateAction } from "react";
@@ -24,8 +23,6 @@ export default function LoginForm({
   const [pendingUser, setPendingUser] = useState<User | null>(null);
   const [mfaSession, setMfaSession] = useState("");
 
-  const navigate = useNavigate();
-
   const handleLogin = async () => {
     try {
       const { user, requiresMfa, session } = await loginRequest(
@@ -43,7 +40,7 @@ export default function LoginForm({
         // No MFA required - proceed with normal login
         setAuthenticated(true);
         setUser(user);
-        await navigate("/app");
+        window.location.href = "/app";
       }
     } catch (err: unknown) {
       setMessage(["error", String(err)]);

@@ -8,7 +8,6 @@ import {
 import { verifyMfaChallengeRequest } from "../api/auth";
 import { useAuth } from "../contexts/Auth";
 import "./Mfa.css";
-import { useNavigate } from "react-router-dom";
 import type { User } from "@tarang-and-tina/shared/dist/domain";
 
 export default function MfaVerify({
@@ -36,8 +35,6 @@ export default function MfaVerify({
     };
   }, []);
 
-  const navigate = useNavigate();
-
   const handleMfaVerification = async () => {
     if (mfaCode.length !== 6) return;
 
@@ -46,7 +43,7 @@ export default function MfaVerify({
       await verifyMfaChallengeRequest(pendingUser.username, mfaCode, session);
       setAuthenticated(true);
       setUser(pendingUser);
-      await navigate("/app");
+      window.location.href = "/app";
     } catch (err: unknown) {
       onError(String(err));
     } finally {

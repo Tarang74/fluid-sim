@@ -1,9 +1,6 @@
 import "./index.css";
-import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
-  const navigate = useNavigate();
-
   return (
     <>
       <main className="hero-main">
@@ -16,7 +13,7 @@ export default function Hero() {
           <div
             className="launch-button"
             onClick={() => {
-              void navigate("/app");
+              window.location.href = "/app";
             }}
           >
             Launch
